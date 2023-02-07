@@ -1,3 +1,5 @@
+import { gsap } from 'gsap';
+
 //nav anim
 console.log('hello!');
 
