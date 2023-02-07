@@ -1,33 +1,23 @@
-import { gsap } from 'gsap';
-
-import { greetUser } from '$utils/greet';
-
-window.Webflow ||= [];
-window.Webflow.push(() => {
-  const name = 'John Doe';
-  greetUser(name);
-});
-
 //nav anim
 console.log('hello!');
 
 // get elements
-const menuLink = document.querySelector('.db_nav-menu-link');
-const content = document.querySelector('.db_nav-menu-content');
-const menuBG = document.querySelector('.db_nav-menu');
-const dropdownWrap = document.querySelector('.db_menu-wrapper');
+let menuLink = $('.db_nav-menu-link');
+let content = $('.db_nav-menu-content');
+let menuBG = $('.db_menu-bg');
+let dropdownWrap = $('.db_menu-wrapper');
 
 gsap.defaults({
   duration: 0.4,
 });
 
 // Link Hover In
-menuLink.addEventListener('mouseenter', function () {
+menuLink.on('mouseenter', function () {
   // get elements
-  const previousLink = menuLink.filter('.active').removeClass('active');
-  const currentLink = this.addClass('active');
-  const previousContent = content.filter('.active').removeClass('active');
-  const currentContent = content.eq($(this).index()).addClass('active');
+  let previousLink = menuLink.filter('.active').removeClass('active');
+  let currentLink = $(this).addClass('active');
+  let previousContent = content.filter('.active').removeClass('active');
+  let currentContent = content.eq($(this).index()).addClass('active');
   // play animations
   if (previousLink.length === 0) {
     revealDropdown(currentContent);
@@ -37,7 +27,7 @@ menuLink.addEventListener('mouseenter', function () {
 });
 
 // Menu Hover Out
-menuBG?.addEventListener('mouseleave', function () {
+$('.db_nav-menu').on('mouseleave', function () {
   showDropdown.reverse();
 });
 
@@ -73,7 +63,7 @@ function switchDropdown(previousContent, currentContent) {
 }
 
 // Open dropdown animation
-const showDropdown = gsap.timeline({
+let showDropdown = gsap.timeline({
   paused: true,
   onReverseComplete: () => {
     dropdownWrap.css('display', 'none');
